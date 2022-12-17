@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @author      Iuri Cardoso Araujo <iuriaraujoc.eng@gmail.com>
+ * @copyright   Copyright (c) 2022, Iuri Cardoso Araujo
+ * @link        https://github.com/iuriaraujocs
+ * @package Iuriaraujocs_Customer
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Customer\Model\AccountManagement">
+        <plugin name="firstname_attribute_rules_customer_registration"
+                type="Iuriaraujocs\Customer\Plugin\Customer\Model\AddFirstnameRuleOnRegister"/>
+    </type>
+    <!-- custom customer registration log -->
+    <type name="Iuriaraujocs\Customer\Model\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <virtualType name="Iuriaraujocs\Customer\Model\Logger\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">customer-registration-logger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Iuriaraujocs\Customer\Model\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Iuriaraujocs\Customer\Observer\LogCustomerDataAfterRegister">
+        <arguments>
+            <argument name="logger" xsi:type="object">Iuriaraujocs\Customer\Model\Logger\Logger</argument>
+        </arguments>
+    </type>
+</config>
