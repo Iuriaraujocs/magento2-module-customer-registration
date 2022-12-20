@@ -11,9 +11,19 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Iuriaraujocs\Customer\Api\AttributeRulesCommandInterface"
+                type="Iuriaraujocs\Customer\Model\AccountManagement\Registration\AttributeRulesCommand" />
     <type name="Magento\Customer\Model\AccountManagement">
         <plugin name="firstname_attribute_rules_customer_registration"
                 type="Iuriaraujocs\Customer\Plugin\Customer\Model\AddFirstnameRuleOnRegister"/>
+    </type>
+    <type name="Iuriaraujocs\Customer\Model\AccountManagement\Registration\AttributeRulesCommand">
+        <arguments>
+            <argument name="attributeRulesProvider" xsi:type="array">
+                <item name="firstname_without_spaces_rule"
+                      xsi:type="object">Iuriaraujocs\Customer\Model\AccountManagement\Registration\AttributeRules\FirstnameWithoutWhiteSpacesRule</item>
+            </argument>
+        </arguments>
     </type>
     <!-- custom customer registration log -->
     <type name="Iuriaraujocs\Customer\Model\Logger\Handler">
@@ -30,6 +40,11 @@
         </arguments>
     </virtualType>
     <type name="Iuriaraujocs\Customer\Observer\LogCustomerDataAfterRegister">
+        <arguments>
+            <argument name="logger" xsi:type="object">Iuriaraujocs\Customer\Model\Logger\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Iuriaraujocs\Customer\Model\AccountManagement\Registration">
         <arguments>
             <argument name="logger" xsi:type="object">Iuriaraujocs\Customer\Model\Logger\Logger</argument>
         </arguments>
