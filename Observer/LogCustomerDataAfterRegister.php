@@ -14,7 +14,7 @@ namespace Iuriaraujocs\Customer\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Psr\Log\LoggerInterface;
-use Magento\Setup\Exception;
+use Magento\Customer\Api\Data\CustomerInterface;
 
 class LogCustomerDataAfterRegister implements ObserverInterface
 {
@@ -47,9 +47,30 @@ class LogCustomerDataAfterRegister implements ObserverInterface
                 ->getEvent()
                 ->getCustomer();
 
-            $this->logger->info('Its work!');
-        } catch (Exception $e) {
-            $this->logger->critical('An error happens');
+            $this->logger
+                ->info($this->getSuccessResponse($customer));
+        } catch (\Exception $e) {
+            $this->logger->critical($e->getMessage());
         }
+    }
+
+    /**
+     * Get formatted response
+     *
+     * @param CustomerInterface $customer
+     * @return string
+     */
+    private function getSuccessResponse(CustomerInterface $customer): string
+    {
+        $data = [
+            'status' => 'ok',
+            'customer data' => [
+                'registration date' => $customer->getCreatedAt(),
+                'firstname' => $customer->getFirstname(),
+                'lastname' => $customer->getLastname(),
+                'email' => $customer->getEmail()
+            ]
+        ];
+        return json_encode($data);
     }
 }

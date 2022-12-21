@@ -13,14 +13,14 @@ namespace Iuriaraujocs\Customer\Api;
 
 use Magento\Customer\Api\Data\CustomerInterface;
 
-interface AttributeRulesCommandInterface
+interface EmailSenderCommandInterface
 {
 
     /**
-     * Apply attribute rules command
+     * Execute email send command
      *
      * @param CustomerInterface $customerData
-     * @return mixed
+     * @return void
      */
     public function execute(CustomerInterface $customerData);
 }

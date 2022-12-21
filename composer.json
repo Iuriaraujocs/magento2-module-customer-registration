@@ -5,7 +5,8 @@
   "type": "magento2-module",
   "require": {
     "magento/framework": "*",
-    "magento/module-customer": "103.0.*"
+    "magento/module-customer": "103.0.*",
+      "ext-json": "*"
   },
   "license": [
     "Proprietary"

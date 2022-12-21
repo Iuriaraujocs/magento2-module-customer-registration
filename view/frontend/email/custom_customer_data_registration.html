@@ -1,0 +1,30 @@
+<!--@subject {{trans "Customer Registration Data"}} @-->
+{{template config_path="design/email/header_template"}}
+<h1>New Customer Registration</h1>
+<table>
+    <tr>
+        <td>
+            <strong>{{trans "Firstname: "}}</strong>
+        </td>
+        <td>
+            {{trans "%firstname." firstname=$firstname}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>{{trans "Lastname: "}}</strong>
+        </td>
+        <td>
+            {{trans "%lastname." lastname=$lastname}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <strong>{{trans "Email: "}}</strong>
+        </td>
+        <td>
+            {{trans "%email." email=$email}}
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

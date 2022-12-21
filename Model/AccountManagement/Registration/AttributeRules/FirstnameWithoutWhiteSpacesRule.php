@@ -11,9 +11,10 @@ declare(strict_types=1);
 
 namespace Iuriaraujocs\Customer\Model\AccountManagement\Registration\AttributeRules;
 
+use Iuriaraujocs\Customer\Api\AttributeRuleInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 
-class FirstnameWithoutWhiteSpacesRule
+class FirstnameWithoutWhiteSpacesRule implements AttributeRuleInterface
 {
 
     /**
@@ -22,7 +23,7 @@ class FirstnameWithoutWhiteSpacesRule
      * @param CustomerInterface $customerData
      * @return void
      */
-    public function execute(CustomerInterface $customerData): void
+    public function execute(CustomerInterface $customerData)
     {
         $firstname = $customerData->getFirstname();
         $formattedFirstname = preg_replace('/\s+/', '', $firstname);
