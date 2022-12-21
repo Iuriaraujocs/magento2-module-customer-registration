@@ -9,9 +9,11 @@
  *
  */
 -->
-
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
+        <tab id="iuriaraujocs" translate="label" sortOrder="9">
+            <label>Iuriaraujocs Extension</label>
+        </tab>
         <section id="iuriaraujocs_customer" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Customer Registration</label>
             <tab>iuriaraujocs</tab>

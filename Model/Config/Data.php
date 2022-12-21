@@ -11,17 +11,14 @@ declare(strict_types=1);
 
 namespace Iuriaraujocs\Customer\Model\Config;
 
+use Iuriaraujocs\Customer\Api\Data\ConfigDataInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
 /**
  * Helper class to get backoffice configuration of module
  */
-class Data
+class Data implements ConfigDataInterface
 {
-    /**
-     * @var string
-     */
-    const IS_MODULE_ENABLE = 'iuriaraujocs_customer/default/enable';
 
     /**
      * @var ScopeConfigInterface
@@ -29,7 +26,8 @@ class Data
     protected $scopeConfig;
 
     /**
-     * Data constructor.
+     * Construct method
+     *
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(ScopeConfigInterface $scopeConfig)
@@ -38,9 +36,7 @@ class Data
     }
 
     /**
-     * Verify if current module is active
-     *
-     * @return boolean
+     * @inheritDoc
      */
     public function isModuleEnable(): bool
     {

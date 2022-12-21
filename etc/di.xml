@@ -15,6 +15,8 @@
                 type="Iuriaraujocs\Customer\Model\AccountManagement\Registration\AttributeRulesCommand" />
     <preference for="Iuriaraujocs\Customer\Api\EmailSenderCommandInterface"
                 type="Iuriaraujocs\Customer\Model\Mail\EmailSenderCommand" />
+    <preference for="Iuriaraujocs\Customer\Api\Data\ConfigDataInterface"
+                type="Iuriaraujocs\Customer\Model\Config\Data" />
     <type name="Magento\Customer\Model\AccountManagement">
         <plugin name="firstname_attribute_rules_customer_registration"
                 type="Iuriaraujocs\Customer\Plugin\Customer\Model\AddFirstnameRuleOnRegister"/>

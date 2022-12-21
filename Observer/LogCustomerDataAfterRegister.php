@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iuriaraujocs\Customer\Observer;
 
+use Iuriaraujocs\Customer\Api\Data\ConfigDataInterface;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Psr\Log\LoggerInterface;
@@ -20,6 +21,11 @@ class LogCustomerDataAfterRegister implements ObserverInterface
 {
 
     /**
+     * @var ConfigDataInterface
+     */
+    private $config;
+
+    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -27,10 +33,14 @@ class LogCustomerDataAfterRegister implements ObserverInterface
     /**
      * Construct method
      *
+     * @param ConfigDataInterface $config
      * @param LoggerInterface $logger
      */
-    public function __construct(LoggerInterface $logger)
-    {
+    public function __construct(
+        ConfigDataInterface $config,
+        LoggerInterface $logger
+    ) {
+        $this->config = $config;
         $this->logger = $logger;
     }
 
@@ -43,10 +53,12 @@ class LogCustomerDataAfterRegister implements ObserverInterface
     public function execute(Observer $observer)
     {
         try {
+            if (!$this->config->isModuleEnable()) {
+                return;
+            }
             $customer = $observer
                 ->getEvent()
                 ->getCustomer();
-
             $this->logger
                 ->info($this->getSuccessResponse($customer));
         } catch (\Exception $e) {

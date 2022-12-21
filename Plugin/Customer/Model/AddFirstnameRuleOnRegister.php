@@ -5,11 +5,17 @@ declare(strict_types=1);
 namespace Iuriaraujocs\Customer\Plugin\Customer\Model;
 
 use Iuriaraujocs\Customer\Api\AttributeRulesCommandInterface;
+use Iuriaraujocs\Customer\Api\Data\ConfigDataInterface;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 
 class AddFirstnameRuleOnRegister
 {
+
+    /**
+     * @var ConfigDataInterface
+     */
+    private $config;
 
     /**
      * @var AttributeRulesCommandInterface
@@ -19,11 +25,14 @@ class AddFirstnameRuleOnRegister
     /**
      * Construct method
      *
+     * @param ConfigDataInterface $config
      * @param AttributeRulesCommandInterface $attributeRulesCommand
      */
     public function __construct(
+        ConfigDataInterface $config,
         AttributeRulesCommandInterface $attributeRulesCommand
     ) {
+        $this->config = $config;
         $this->attributeRulesCommand = $attributeRulesCommand;
     }
 
@@ -43,8 +52,10 @@ class AddFirstnameRuleOnRegister
         $password = null,
         $redirectUrl = ''
     ) {
-        $this->attributeRulesCommand
-            ->execute($customerData);
+        if ($this->config->isModuleEnable()) {
+            $this->attributeRulesCommand
+                ->execute($customerData);
+        }
 
         return [$customerData, $password, $redirectUrl];
     }

@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Iuriaraujocs\Customer\Observer;
 
+use Iuriaraujocs\Customer\Api\Data\ConfigDataInterface;
 use Iuriaraujocs\Customer\Model\Mail\EmailSenderCommand;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -21,6 +22,11 @@ class SendMailCustomerDataAfterRegister implements ObserverInterface
 {
 
     /**
+     * @var ConfigDataInterface
+     */
+    private $config;
+
+    /**
      * @var EmailSenderCommand
      */
     private $emailSenderCommand;
@@ -28,10 +34,14 @@ class SendMailCustomerDataAfterRegister implements ObserverInterface
     /**
      * Construct method
      *
+     * @param ConfigDataInterface $config
      * @param EmailSenderCommand $emailSenderCommand
      */
-    public function __construct(EmailSenderCommand $emailSenderCommand)
-    {
+    public function __construct(
+        ConfigDataInterface $config,
+        EmailSenderCommand $emailSenderCommand
+    ) {
+        $this->config = $config;
         $this->emailSenderCommand = $emailSenderCommand;
     }
 
@@ -44,6 +54,9 @@ class SendMailCustomerDataAfterRegister implements ObserverInterface
     public function execute(Observer $observer)
     {
         try {
+            if (!$this->config->isModuleEnable()) {
+                return;
+            }
             $customer = $observer
                 ->getEvent()
                 ->getCustomer();
