@@ -27,11 +27,6 @@ class FirstnameWithoutWhiteSpacesRuleTest extends TestCase
     private $customerDataMock;
 
     /**
-     * @var LoggerInterface|MockObject
-     */
-    private $loggerMock;
-
-    /**
      * @var Model|MockObject
      */
     private $instance;
@@ -48,7 +43,7 @@ class FirstnameWithoutWhiteSpacesRuleTest extends TestCase
     /**
      * @return void
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(Model::class, $this->instance);
     }
@@ -57,7 +52,7 @@ class FirstnameWithoutWhiteSpacesRuleTest extends TestCase
      * @dataProvider dataProvider
      * @return void
      */
-    public function testFirstnameShouldResultWithoutAnyWhiteSpaces($firstname)
+    public function testFirstnameShouldResultWithoutAnyWhiteSpaces($firstname): void
     {
         $this->customerDataMock
             ->expects($this->exactly(1))
@@ -116,7 +111,7 @@ class FirstnameWithoutWhiteSpacesRuleTest extends TestCase
     /**
      * @return void
      */
-    private function setMocks()
+    private function setMocks(): void
     {
         $this->customerDataMock = $this->createMock(CustomerInterface::class);
     }
@@ -124,7 +119,7 @@ class FirstnameWithoutWhiteSpacesRuleTest extends TestCase
     /**
      * @return void
      */
-    private function setInstance()
+    private function setInstance(): void
     {
         $objectManager = new ObjectManager($this);
         $this->instance = $objectManager->getObject(

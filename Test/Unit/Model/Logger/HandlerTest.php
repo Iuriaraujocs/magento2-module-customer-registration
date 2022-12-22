@@ -35,7 +35,7 @@ class HandlerTest extends TestCase
     /**
      * @return void
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(Model::class, $this->instance);
     }

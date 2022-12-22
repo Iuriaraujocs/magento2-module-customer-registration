@@ -32,6 +32,11 @@ class SendMailCustomerDataAfterRegister implements ObserverInterface
     private $emailSenderCommand;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * Construct method
      *
      * @param ConfigDataInterface $config
@@ -39,10 +44,12 @@ class SendMailCustomerDataAfterRegister implements ObserverInterface
      */
     public function __construct(
         ConfigDataInterface $config,
-        EmailSenderCommand $emailSenderCommand
+        EmailSenderCommand $emailSenderCommand,
+        LoggerInterface $logger
     ) {
         $this->config = $config;
         $this->emailSenderCommand = $emailSenderCommand;
+        $this->logger = $logger;
     }
 
     /**

@@ -54,7 +54,7 @@ class AttributeRulesCommandTest extends TestCase
     /**
      * @return void
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(Model::class, $this->instance);
     }
@@ -62,7 +62,7 @@ class AttributeRulesCommandTest extends TestCase
     /**
      * @return void
      */
-    public function testExecuteMethodShouldExecuteWithoutErrors()
+    public function testExecuteMethodShouldExecuteWithoutErrors(): void
     {
         $this->firstnameWithoutWhiteSpacesRuleMock
             ->expects($this->exactly(1))
@@ -76,7 +76,7 @@ class AttributeRulesCommandTest extends TestCase
     /**
      * @return void
      */
-    public function testWhenThrowExceptionShouldLog()
+    public function testWhenThrowExceptionShouldLog(): void
     {
         $this->firstnameWithoutWhiteSpacesRuleMock
             ->expects($this->exactly(1))
@@ -93,7 +93,7 @@ class AttributeRulesCommandTest extends TestCase
     /**
      * @return void
      */
-    private function setMocks()
+    private function setMocks(): void
     {
         $this->loggerMock = $this->createMock(LoggerInterface::class);
         $this->firstnameWithoutWhiteSpacesRuleMock = $this->createMock(FirstnameWithoutWhiteSpacesRule::class);
@@ -103,7 +103,7 @@ class AttributeRulesCommandTest extends TestCase
     /**
      * @return void
      */
-    private function setInstance()
+    private function setInstance(): void
     {
         $objectManager = new ObjectManager($this);
         $this->instance = $objectManager->getObject(

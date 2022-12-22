@@ -67,7 +67,7 @@ class EmailSenderTest extends TestCase
     /**
      * @return void
      */
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $this->assertInstanceOf(Model::class, $this->instance);
     }
@@ -75,7 +75,7 @@ class EmailSenderTest extends TestCase
     /**
      * @return void
      */
-    public function testShouldPassThroughtWithoutErrors()
+    public function testShouldPassThroughtWithoutErrors(): void
     {
         $this->inlineTranslationMock
             ->expects($this->exactly(1))
@@ -133,7 +133,7 @@ class EmailSenderTest extends TestCase
     /**
      * @return void
      */
-    private function setMocks()
+    private function setMocks(): void
     {
         $this->customerDataMock = $this->createMock(CustomerInterface::class);
         $this->emailDataMock = $this->createMock(EmailData::class);
@@ -148,7 +148,7 @@ class EmailSenderTest extends TestCase
     /**
      * @return void
      */
-    private function setInstance()
+    private function setInstance(): void
     {
         $objectManager = new ObjectManager($this);
         $this->instance = $objectManager->getObject(
