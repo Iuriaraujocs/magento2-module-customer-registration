@@ -4,12 +4,13 @@
   "description": "N/A",
   "type": "magento2-module",
   "require": {
+      "php": ">=7.3",
     "magento/framework": "*",
     "magento/module-customer": "103.0.*",
       "ext-json": "*"
   },
   "license": [
-    "Proprietary"
+    "MIT"
   ],
   "autoload": {
     "files": [
